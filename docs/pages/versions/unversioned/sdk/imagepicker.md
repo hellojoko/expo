@@ -56,6 +56,7 @@ Display the system UI for taking a photo with the camera. Requires `Permissions.
 
   A map of options:
 
+  - **mediaTypes (_String_)** -- Choose what type of media to pick. Usage: `ImagePicker.MediaTypeOptions.<Type>`, where `<Type>` is one of: `Images`, `Videos`, `All` (only on iOS). Defaults to `false`
   - **allowsEditing (_boolean_)** -- Whether to show a UI to edit the image after it is picked. On Android the user can crop and rotate the image and on iOS simply crop it. Defaults to `false`.
   - **aspect (_array_)** -- An array with two entries `[x, y]` specifying the aspect ratio to maintain if the user is allowed to edit the image (by passing `allowsEditing: true`). This is only applicable on Android, since on iOS the crop rectangle is always a square.
   - **quality (_number_)** -- Specify the quality of compression, from 0 to 1. 0 means compress for small size, 1 means compress for maximum quality.
@@ -64,9 +65,9 @@ Display the system UI for taking a photo with the camera. Requires `Permissions.
 
 #### Returns
 
-If the user cancelled taking a photo, returns `{ cancelled: true }`.
+If the user cancelled action returns `{ cancelled: true }`.
 
-Otherwise, returns `{ cancelled: false, uri, width, height, exif, base64 }` where `uri` is a URI to the local image file (useable as the source for an `Image` element) and `width, height` specify the dimensions of the image. `base64` is included if the `base64` option was truthy, and is a string containing the JPEG data of the image in Base64--prepend that with `'data:image/jpeg;base64,'` to get a data URI, which you can use as the source for an `Image` element for example. `exif` is included if the `exif` option was truthy, and is an object containing EXIF data for the image--the names of its properties are EXIF tags and their values are the values for those tags.
+Otherwise, returns `{ cancelled: false, type: "video", uri, width, height, duration }` when media type was `Videos` or else `{ cancelled: false, type: "image", uri, width, height, exif, base64 }` where `uri` is a URI to the local image file (useable as the source for an `Image` element) and `width, height` specify the dimensions of the image. `base64` is included if the `base64` option was truthy, and is a string containing the JPEG data of the image in Base64--prepend that with `'data:image/jpeg;base64,'` to get a data URI, which you can use as the source for an `Image` element for example. `exif` is included if the `exif` option was truthy, and is an object containing EXIF data for the image--the names of its properties are EXIF tags and their values are the values for those tags.
 
 <SnackEmbed snackId="@documentation/imagepicker-from-camera-roll" />
 
